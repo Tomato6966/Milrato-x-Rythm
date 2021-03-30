@@ -1,0 +1,22 @@
+{
+  "token": "",
+  "prefix": "!",
+  "ksoftapi": "",
+  
+  
+  "clientsettings": {
+    "nodes": [
+      {
+         "host": "localhost",
+         "port": 2333,
+         "password": "youshallnotpass"
+       }
+     ]
+  },
+
+  "spotify": {
+    "clientSecret": "",
+    "clientID": ""
+  }
+
+}
