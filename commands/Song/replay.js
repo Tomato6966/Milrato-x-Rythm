@@ -1,9 +1,18 @@
+const {
+  MessageEmbed
+} = require(`discord.js`)
+const config = require(`../../botconfig/config.json`)
+const ee = require(`../../botconfig/embed.json`);
+const {
+  createBar,
+  format
+} = require(`../../handlers/functions`);
 module.exports = {
-  name: `shuffle`,
-  category: `Queue`,
-  aliases: [`mix`, "random"],
-  description: `Shuffles the Queue`,
-  usage: `shuffle`,
+  name: `replay`,
+  category: `Song`,
+  aliases: [``],
+  description: `Resets the progress of the current song.`,
+  usage: `replay`,
   run: async (client, message, args, cmduser, text, prefix) => {
       //get the voice channel of the member
       const { channel } = message.member.voice;
@@ -18,20 +27,14 @@ module.exports = {
       //if no player or no botchannel return error
       if(!player || !botchannel) return message.channel.send(`**:x: Nothing playing in this server**`);
       //if queue size too small return error
-      if(!player.current < 1) return message.channel.send(`**:x: Nothing playing in this server**`);
+      if (!player.queue || !player.queue.current) return message.channel.send(`**:x: Nothing playing in this server**`);
       //if user is not in the right channel as bot, then return error
       if(player && channel.id !== player.voiceChannel)
         return message.channel.send(`**:x: You need to be in the same voice channel as Milrato x Rythm to use this command**`);
-      //if bot connected bot not with the lavalink player then try to delete the player
-      if(player && botchannel && channel.id !== botchannel.id){
-        player.destroy();
-      }
-      player.set(`beforeshuffle`, player.queue.map(track => track));
-      //shuffle the Queue
-      player.queue.shuffle();
-      //return success message
-     return message.channel.send(`**:boom: Cleared... :stop_button:**`);
-
+      //seek to the new Seek position
+      player.seek(0);
+      //Send Success Message
+      return message.channel.send(`**:musical_note: Song progress reset :track_previous:**`);
   }
 };
 /**

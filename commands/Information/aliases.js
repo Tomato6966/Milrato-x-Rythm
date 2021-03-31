@@ -15,9 +15,22 @@ module.exports = {
         //SONG CMD
 let string1 = `\`\`\`fix
 !disconnect -- dc, leave, dis
+!forward    -- fwd
+!grab       -- save, yoink
+!loop       -- repeat
+!lyrics     -- l, ly
+!nowplaying -- np
 !pause      -- stop
 !play       -- p
+!playskip   -- ps, pskip, playnow, pn
+!playtop    -- ptop, pt
+!replay     -- Resets the progress of the current song
 !resume     -- continue, re, res
+!rewind     -- rwd
+!search     -- find
+!seek       -- 
+!skip       -- next, s
+!soundcloud -- sc
 \`\`\``
 //QUEUE CMD
 let string2 = `\`\`\`fix

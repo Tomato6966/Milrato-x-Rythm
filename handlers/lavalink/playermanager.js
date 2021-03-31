@@ -51,14 +51,14 @@ const search = args.join(" ");
 
   var results = "";
   if(message.guild.me.permissionsIn(message.channel).has("EMBED_LINKS")){
-    results = res.tracks.slice(0, max).map((track, index) => `\`${++index}.\` [${String(track.title).split("[").join("{").split("]").join("}")}](${track.uri}) **[${format(track.duration).split(" | ")[0]}]**`).join('\n\n');
+    results = res.tracks.slice(0, max).map((track, index) => `\`${++index}.\` [${String(track.title).split("[").join("\[").split("]").join("\]")}](${track.uri}) **[${format(track.duration).split(" | ")[0]}]**`).join('\n\n');
     results += "\n\n\n**Type a number to make a choice. Type \`cancel\` to exit**";
     results = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL({dynamic: true}), "https://milrato.eu")
     .setColor(ee.color)
     .setDescription(results)
   }else {
-    results = res.tracks.slice(0, max).map((track, index) => `\`${++index}.\` \`${String(track.title).split("[").join("{").split("]").join("}")}\` **[${format(track.duration).split(" | ")[0]}]**`).join('\n\n');
+    results = res.tracks.slice(0, max).map((track, index) => `\`${++index}.\` \`${String(track.title).split("[").join("\[").split("]").join("\]")}\` **[${format(track.duration).split(" | ")[0]}]**`).join('\n\n');
     results += "\n\n\n**Type a number to make a choice. Type \`cancel\` to exit**";
   }
   

@@ -1,14 +1,14 @@
 const { MessageEmbed } = require(`discord.js`);
 const playermanager = require(`../../handlers/lavalink/playermanager`);
 module.exports = {
-    name: `search`,
+    name: `soundcloud`,
     category: `Song`,
-    aliases: [`find`],
-    description: `Searches from Youtube for a song via your query and returns the top 10 results.`,
-    usage: `search <link/query>`,
+    aliases: [`sc`],
+    description: `Plays a song from SounCloud with the given name/url`,
+    usage: `soundcloud <link/query>`,
     run: async (client, message, args, cmduser, text, prefix) => {
       const { channel } = message.member.voice;
-      if (!channel)  return message.channel.send(`:x: **You have to be in a voice channel to use this command.**`);
+      if (!channel) return message.channel.send(`:x: **You have to be in a voice channel to use this command.**`);
       //send error if member is Deafed
       if(message.member.voice.selfDeaf) return message.channel.send(`:x: **You cannot run this command while deafened**`);
       const botchannel = message.guild.me.voice.channel;
@@ -34,9 +34,31 @@ module.exports = {
       if(player && botchannel && channel.id !== botchannel.id){
         player.destroy();
       }
-
-      //play the song from our playermanager
-      playermanager(client, message, args, `search:youtube`);
+      //IF YOUTUBE SEND INFO WITH YOUTUBE
+      if(message.content.includes("youtu")){
+        //send searching
+        message.channel.send(`<:youtube:826100274095194132> **Searching** :mag_right: \`${args.join(" ")}\``)
+        //play the song from our playermanager
+        playermanager(client, message, args, `play:youtube`);
+      //IF SPOTIFY SEARCH SEND INFO WITH SPOTIFY
+      } else if(message.content.includes("spotify")){
+        //send searching
+        message.channel.send(`<:spotify:818555971873013761>**Searching** :mag_right: \`${args.join(" ")}\``)
+        //play the song from our playermanager
+        playermanager(client, message, args, `play:youtube`);
+      //IF SOUNDCLOUD SEARCH SEND INFO WITH SOUNDCLOUD
+      } else if(message.content.includes("soundcloud")){
+        //send searching
+        message.channel.send(`<:soundcloud:818555972079321128> **Searching** :mag_right: \`${args.join(" ")}\``)
+        //play the song from our playermanager
+        playermanager(client, message, args, `play:soundcloud`);
+      //ELSE SEND RYTHM INFO
+      } else {
+        //send searching
+        message.channel.send(`<:rythm:826519647347539990> **Searching** :mag_right: \`${args.join(" ")}\``)
+        //play the song from our playermanager
+        playermanager(client, message, args, `play:youtube`);
+      }
   }
 };
 /**

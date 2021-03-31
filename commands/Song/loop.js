@@ -1,9 +1,9 @@
 module.exports = {
-  name: `shuffle`,
+  name: `loop`,
   category: `Queue`,
-  aliases: [`mix`, "random"],
-  description: `Shuffles the Queue`,
-  usage: `shuffle`,
+  aliases: ["repeat"],
+  description: `Toggles looping for the current playing song.`,
+  usage: `loop`,
   run: async (client, message, args, cmduser, text, prefix) => {
       //get the voice channel of the member
       const { channel } = message.member.voice;
@@ -26,12 +26,10 @@ module.exports = {
       if(player && botchannel && channel.id !== botchannel.id){
         player.destroy();
       }
-      player.set(`beforeshuffle`, player.queue.map(track => track));
-      //shuffle the Queue
-      player.queue.shuffle();
-      //return success message
-     return message.channel.send(`**:boom: Cleared... :stop_button:**`);
-
+      //change Queue Mode
+      player.setTrackRepeat(!player.trackRepeat);
+      //Send Success Message
+      return message.channel.send(`**${player.trackRepeat ? `:repeat_one: Enabled` : `:repeat_one: Disabled`}**`);
   }
 };
 /**

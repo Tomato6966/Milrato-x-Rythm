@@ -1,9 +1,18 @@
+const {
+  MessageEmbed
+} = require(`discord.js`)
+const config = require(`../../botconfig/config.json`)
+const ee = require(`../../botconfig/embed.json`);
+const {
+  createBar,
+  format
+} = require(`../../handlers/functions`);
 module.exports = {
-  name: `resume`,
+  name: `rewind`,
   category: `Song`,
-  aliases: [`continue`, "re", "res"],
-  description: `Resumes paused music`,
-  usage: `resume`,
+  aliases: [`rwd`],
+  description: `Rewinds by a certain amount of time in the current track.`,
+  usage: `rewind <time>`,
   run: async (client, message, args, cmduser, text, prefix) => {
       //get the voice channel of the member
       const { channel } = message.member.voice;
@@ -18,22 +27,31 @@ module.exports = {
       //if no player or no botchannel return error
       if(!player || !botchannel) return message.channel.send(`**:x: Nothing playing in this server**`);
       //if queue size too small return error
-      if(!player.current < 1) return message.channel.send(`**:x: Nothing playing in this server**`);
+      if (!player.queue || !player.queue.current) return message.channel.send(`**:x: Nothing playing in this server**`);
       //if user is not in the right channel as bot, then return error
       if(player && channel.id !== player.voiceChannel)
         return message.channel.send(`**:x: You need to be in the same voice channel as Milrato x Rythm to use this command**`);
-      //if bot connected bot not with the lavalink player then try to delete the player
-      if(player && botchannel && channel.id !== botchannel.id){
-        player.destroy();
+      //if invalid usage
+      if (!args[0]) {
+        let string = `${prefix}rewind <Time in seconds>`
+        let embed = new MessageEmbed()
+        .setTitle("**:x: Invalid usage**")
+        .setDescription(string)
+        if(message.guild.me.hasPermission("EMBED_LINKS")){
+          message.channel.send(embed)
+        }else{
+          message.channel.send("**:x: Invalid usage**\n"+string)
+        }
       }
-      //if the player is paused return error
-      if (player.playing)
-        return message.channel.send(`**:x: The player is not paused**`);
-      //pause the player
-      player.pause(false);
-      //return success message
-     return message.channel.send(`**:play_pause: Resuming :thumbsup:**`);
-
+      //get the seektime variable of the user input
+      let seektime = player.position - Number(args[0]) * 1000;
+      //if userinput is wrong correct it 
+      if (seektime >= player.queue.current.duration - player.position || seektime < 0) 
+      return message.channel.send("**:x: Cannot rewind that far back in the song**")
+      //seek to the right time
+      player.seek(Number(seektime));
+      //Send Success Message
+      return message.channel.send(`**:musical_note: Set position to \`${format(player.position)}\` :fast_forward:**`);
   }
 };
 /**

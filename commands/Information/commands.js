@@ -15,9 +15,22 @@ module.exports = {
         //SONG CMD
 let string1 = `\`\`\`fix
 !disconnect -- Disconnects the bot from the voice channel
+!forward    -- Forwards by a certain amount of time
+!grab       -- Saves the current playing song to your DMs
+!loop       -- Toggles looping for the current playing song
+!lyrics     -- Shows The Lyrics of the current track
+!nowplaying -- Shows what song Rythm is currently playing
 !pause      -- Pauses the current playing track
-!play       -- Plays a song from youtube
+!play       -- Play a song from YouTube with the given name/url
+!playskip   -- Skips the current song and plays the song
+!playtop    -- Adds a song with the given query on top of queue
+!replay     -- Resets the progress of the current song
 !resume     -- Resumes paused music
+!rewind     -- Rewinds by a certain amount of time
+!search     -- Searches from Youtube for a song via your query
+!seek       -- Seeks to a certain point in the current track
+!skip       -- Votes to skip the current playing song
+!soundcloud -- Play a song from SounCloud with the given name/url
 \`\`\``
 //QUEUE CMD
 let string2 = `\`\`\`fix
