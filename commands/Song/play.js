@@ -24,6 +24,7 @@ module.exports = {
         }else{
           message.channel.send("**:x: Invalid usage**\n"+string)
         }
+        return;
       }
       ///get the player
       const player = client.manager.players.get(message.guild.id);
@@ -53,12 +54,17 @@ module.exports = {
         //play the song from our playermanager
         playermanager(client, message, args, `play:soundcloud`);
       //ELSE SEND RYTHM INFO
-      } else {
-        //send searching
-        message.channel.send(`<:rythm:826519647347539990> **Searching** :mag_right: \`${args.join(" ")}\``)
-        //play the song from our playermanager
-        playermanager(client, message, args, `play:youtube`);
-      }
+    } else if(message.content.includes("http")){
+      //send searching
+      message.channel.send(`<:rythm:826519647347539990> **Searching** :mag_right: \`${args.join(" ")}\``)
+      //play the song from our playermanager
+      playermanager(client, message, args, `play:youtube`);
+    } else {
+      //send searching
+      message.channel.send(`<:youtube:826100274095194132> **Searching** :mag_right: \`${args.join(" ")}\``)
+      //play the song from our playermanager
+      playermanager(client, message, args, `play:youtube`);
+    }
   }
 };
 /**

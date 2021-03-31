@@ -43,6 +43,7 @@ module.exports = {
         }else{
           message.channel.send("**:x: Invalid usage**\n"+string)
         }
+        return;
       }
       //if number is out of range return error
       if (Number(args[0]) < 0 || Number(args[0]) >= player.queue.current.duration / 1000)

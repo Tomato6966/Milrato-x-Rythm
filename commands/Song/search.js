@@ -24,6 +24,7 @@ module.exports = {
         }else{
           message.channel.send("**:x: Invalid usage**\n"+string)
         }
+        return;
       }
       ///get the player
       const player = client.manager.players.get(message.guild.id);

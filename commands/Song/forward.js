@@ -43,6 +43,7 @@ module.exports = {
         }else{
           message.channel.send("**:x: Invalid usage**\n"+string)
         }
+        return;
       }
       //get the seektime variable of the user input
       let seektime = Number(player.position) + Number(args[0]) * 1000;
