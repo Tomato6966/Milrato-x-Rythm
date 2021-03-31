@@ -248,8 +248,6 @@ async function play(client, message, args, type) {
             message.channel.send(playlistembed);
           else
             message.channel.send(`Added: \`${res.tracks[0].title}\` - to the Queue\n**Channel:** ${res.tracks[0].author}\n**Song Duration:** ${res.tracks[0].isStream ? "LIVE STREAM" : format(res.tracks[0].duration).split(" | ")[0]}\n**Estimated time until playing:** ${time}\n**Position in queue:** ${player.queue.length}\n${res.tracks[0].uri}`);
-      
-        player.play();
     }
 }
 //function for playling song + skipping
@@ -367,8 +365,6 @@ async function playskip(client, message, args, type) {
           message.channel.send(playlistembed);
         else
           message.channel.send(`Added: \`${res.tracks[0].title}\` - to the Queue\n**Channel:** ${res.tracks[0].author}\n**Song Duration:** ${res.tracks[0].isStream ? "LIVE STREAM" : format(res.tracks[0].duration).split(" | ")[0]}\n**Estimated time until playing:** ${time}\n**Position in queue:** ${player.queue.length}\n${res.tracks[0].uri}`);
-    
-      player.play();
   }
 }
 //function for playling song + skipping
@@ -501,8 +497,6 @@ async function playtop(client, message, args, type) {
           message.channel.send(playlistembed);
         else
           message.channel.send(`Added: \`${res.tracks[0].title}\` - to the Queue\n**Channel:** ${res.tracks[0].author}\n**Song Duration:** ${res.tracks[0].isStream ? "LIVE STREAM" : format(res.tracks[0].duration).split(" | ")[0]}\n**Estimated time until playing:** ${time}\n**Position in queue:** ${player.queue.length}\n${res.tracks[0].uri}`);
-    
-      player.play();
   }
 }
 /**
