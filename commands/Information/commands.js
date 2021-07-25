@@ -45,6 +45,7 @@ let string3 = `\`\`\`fix
 !help       -- Shows you Help for Milrato x Rythm
 !ping       -- Gives you info on how fast the Bot responds
 !uptime     -- Shows the time on how long the Bot is online
+!invite     -- Gives You the Invite Link Of Bot
 \`\`\``     
         let pages = [
           {"title": "SONG COMMANDS", "msg": string1},
